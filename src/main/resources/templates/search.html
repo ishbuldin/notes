@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Результаты поиска</h1>
+
+<table>
+
+    <thead>
+    <tr>
+        <th style="width: 5%">#</th>
+        <th style="width: 75%">Note</th>
+        <th style="width: 10%">Edit</th>
+        <th style="width: 10%">Delete</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:each="note : ${notes}">
+        <td th:text="${note.getId()}" style="text-align: center">#</td>
+        <td style="text-align: center">
+            <i th:if="${note.getTitle()} == null" th:text="${note.getBody()}"></i>
+            <i th:if="${note.getTitle()} != null" th:text="${note.getTitle()}"></i>
+        </td>
+        <td style="text-align: center"><a th:href="@{'/view/{id}'(id=${note.getId()})}">view</a></td>
+        <td style="text-align: center"><a th:href="@{'/delete/{id}'(id=${note.getId()})}">delete</a></td>
+    </tr>
+    </tbody>
+
+</table>
+
+</body>
+</html>

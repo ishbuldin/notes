@@ -1,0 +1,49 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Заметки</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<h1>Заметки</h1>
+
+<div>
+    <p>
+        <a th:href="@{'/add'}">Добавить заметку</a>
+    </p>
+
+    <form th:action="@{/search}" method="post">
+        <b>Поиск</b><br>
+        <input type="text" id="title" th:name="expression" />
+        <input type="submit" value="Найти">
+    </form><br>
+
+</div>
+
+<table>
+
+    <thead>
+    <tr>
+        <th style="width: 5%">#</th>
+        <th style="width: 75%">Note</th>
+        <th style="width: 10%">View</th>
+        <th style="width: 10%">Delete</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:each="note : ${notes}">
+        <td th:text="${note.getId()}" style="text-align: center">#</td>
+        <td style="text-align: center">
+            <i th:if="${note.getTitle()} == null" th:text="${note.getBody()}"></i>
+            <i th:if="${note.getTitle()} != null" th:text="${note.getTitle()}"></i>
+        </td>
+        <td style="text-align: center"><a th:href="@{'/view/{id}'(id=${note.getId()})}">view</a></td>
+        <td style="text-align: center"><a th:href="@{'/delete/{id}'(id=${note.getId()})}">delete</a></td>
+    </tr>
+    </tbody>
+
+</table>
+
+</body>
+</html>
